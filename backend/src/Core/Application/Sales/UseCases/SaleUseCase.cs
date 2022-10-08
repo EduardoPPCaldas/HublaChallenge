@@ -66,10 +66,23 @@ public class SaleUseCase : ISaleUseCase
                 Success = true
             };
         }
-        catch (System.Exception)
+        catch (InvalidFileException error)
         {
-            
-            throw;
+            return new CreateSalesWithFileResponse
+            {
+                Success = false,
+                ErrorCode = ErrorCodes.INVALID_SALE_FILE,
+                Message = error.Message
+            };
+        }
+        catch (System.Exception error)
+        {
+            return new CreateSalesWithFileResponse
+            {
+                Success = false,
+                Message = error.Message,
+                ErrorCode = ErrorCodes.INTERNAL_SERVER_ERROR
+            };
         }        
     }
 }
