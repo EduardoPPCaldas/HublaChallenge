@@ -10,4 +10,6 @@ namespace Application.Sales.Ports;
 public interface ISaleUseCase
 {
     Task<CreateSalesWithFileResponse> CreateSalesWithFile(CreateSalesWithFileRequest request);
+
+    Task<GetSalesListResponse> GetSalesListResponse();
 }

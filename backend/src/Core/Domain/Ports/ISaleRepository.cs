@@ -9,4 +9,6 @@ namespace Domain.Ports;
 public interface ISaleRepository
 {
     Task<List<Sale>> CreateSalesWithFile(List<Sale> salesList);
+
+    Task<List<Sale>> GetSalesList();
 }

@@ -85,4 +85,17 @@ public class SaleUseCase : ISaleUseCase
             };
         }        
     }
+
+    public async Task<GetSalesListResponse> GetSalesListResponse()
+    {
+        var salesList = await _saleRepository.GetSalesList();
+
+        var salesDtoList = salesList.Select(x => SaleDTO.MapToDTO(x)).ToList();
+
+        return new GetSalesListResponse
+        {
+            Success = true,
+            Data = salesDtoList
+        };
+    }
 }

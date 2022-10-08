@@ -34,7 +34,27 @@ public class SaleController : ControllerBase
 
             var response = await _saleUseCase.CreateSalesWithFile(request);
             
-            return await Task.FromResult(Created("", response));
+            if(response.Success) return await Task.FromResult(Created("", response));
+
+            switch (response.ErrorCode)
+            {
+                default:
+                    return BadRequest(response);
+            }
+        }
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<GetSalesListResponse>> GetSalesList()
+    {
+        var response = await _saleUseCase.GetSalesListResponse();
+
+        if (response.Success) return Ok(response);
+
+        switch (response.ErrorCode)
+        {
+            default:
+                return BadRequest(response);
         }
     }
 }

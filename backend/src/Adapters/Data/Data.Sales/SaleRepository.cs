@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Domain.Entities;
 using Domain.Ports;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Data.Sales;
 
@@ -24,5 +25,10 @@ public class SaleRepository : ISaleRepository
         }
         await _databaseContext.SaveChangesAsync();
         return salesList;
+    }
+
+    public async Task<List<Sale>> GetSalesList()
+    {
+        return await _databaseContext.Sales.ToListAsync();
     }
 }
