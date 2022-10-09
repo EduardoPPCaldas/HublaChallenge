@@ -1,16 +1,14 @@
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { List } from "./pages/List";
 import { Upload } from "./pages/Upload";
 
-export function Routes(){
+export function AppRoutes(){
     return (
         <BrowserRouter>
-            <Route path="/">
-                <List/>
-            </Route>
-            <Route path="/upload">
-                <Upload/>
-            </Route>
+            <Routes>               
+                <Route path="/" element={<List/>} />
+                <Route path="/upload" element={<Upload/>}/>
+            </Routes>
         </BrowserRouter>
     )
 } 

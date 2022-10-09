@@ -17,6 +17,6 @@ services:
       DatabasePassword: "root"
       DatabaseName: "hublachallengeapplication"
     ports:
-      - "8080:80"
+      - "5015:80"
     depends_on:
       - db

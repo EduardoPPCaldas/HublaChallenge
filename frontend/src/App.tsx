@@ -1,10 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { NavbarComponent } from './components/navbar';
+import { AppRoutes } from './Routes';
 
 function App() {
   return (
     <>
-      <NavbarComponent/>
+      <AppRoutes/>
     </>
   )
 }
