@@ -1,5 +1,5 @@
 export type SaleModel = {
-    type: string,
+    saleType: string,
     date: Date,
     product: string,
     value: number,

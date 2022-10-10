@@ -1,8 +1,15 @@
 import axios from "axios";
+import { SaleModel } from "../models/sale-model";
 
-export async function getSales(){
-    await axios.get("http://localhost:5015/api/sale")
-        .then(res => {
-            console.log(res);
-        })
+type GetSalesResponse = {
+    data: SaleModel[],
+    errorCode: number,
+    message: string | null,
+    success: boolean
+}
+
+export async function getSales(): Promise<SaleModel[]>{
+    const response = await axios.get<GetSalesResponse>("http://localhost:5015/api/sale");
+    console.log(response.data.data);
+    return response.data.data;
 } 
