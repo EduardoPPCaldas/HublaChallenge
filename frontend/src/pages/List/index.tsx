@@ -1,9 +1,25 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { NavbarComponent } from "../../components/NavbarComponent";
-import { getSales } from "../../services/sale-service";
+import { SaleModel } from "../../models/sale-model";
 
 export function List() {
-    getSales();
+    const [sales, getSales] = useState([{} as SaleModel])
+
+    useEffect(() => {
+        getSalesList();
+    }, [])
+
+    const getSalesList = () => {
+        axios.get("http://localhost:5015/api/sale")
+            .then(res => {
+                const salesList = res.data.data;
+                getSales(salesList);
+            }).catch(err => {
+                console.error(err);
+            })
+    }
 
     return (
         <>
@@ -14,33 +30,25 @@ export function List() {
                         <tr>
                             <th>Type</th>
                             <th>Date</th>
-                            <th>Product</th>
+                            <th>Product Description</th>
                             <th>Value</th>
                             <th>Salesman</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Larry the Bird</td>
-                            <td>@twitter</td>
-                            <td>@twitter</td>
-                            <td>@twitter</td>
-                        </tr>
+                        {sales.map((sale, i) => {
+                            return (
+                                <tr key={i}>
+                                    <td>{sale.saleType}</td>
+                                    <td>{new Date(sale.date).toLocaleDateString()}</td>
+                                    <td>{sale.description}</td>
+                                    <td>{Intl.NumberFormat('pt-br', {style: 'currency',
+                                                                     currency: "BRL",
+                                                                     maximumFractionDigits: 2}).format(sale.value)}</td>
+                                    <td>{sale.salesmanName}</td>
+                                </tr>
+                            )
+                        })}
                     </tbody>
                 </Table>
             </div>

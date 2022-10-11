@@ -1,7 +1,7 @@
 export type SaleModel = {
     saleType: string,
-    date: Date,
-    product: string,
+    date: string,
+    description: string,
     value: number,
     salesmanName: string
 }
