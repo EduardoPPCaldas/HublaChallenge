@@ -69,7 +69,7 @@ export function Upload(){
                 </Toast>
             </ToastContainer>
             <Container>
-                <Form onSubmit={(event) => handleSubmit(event)}>
+                <Form onSubmit={(event) => handleSubmit(event)} aria-label="form">
                     <Form.Group className="my-3">
                         <Form.Label >Send your sales file here:</Form.Label>
                         <Form.Control
