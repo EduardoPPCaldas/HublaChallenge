@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { Button, Container, Form, Toast, ToastContainer } from "react-bootstrap";
+import { Button, Container, Form, FormControlProps, Toast, ToastContainer } from "react-bootstrap";
 import { NavbarComponent } from "../../components/NavbarComponent";
 import logo from "../../assets/logo.svg";
 
@@ -11,7 +11,8 @@ export function Upload(){
     const [background, setBackground] = useState("danger");
     const [file, setFile] = useState<File>();
 
-    const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const handleFileChange = (event: any) => {
+        // event has a type of ChangeEvent<HTMLInputElement>, the Form.Control event type it's not available but it can be mapped to ChangeEvent<HTMLInputElement> type
         const fileFormList = event.target.files;
 
         if(!fileFormList) return;
@@ -69,14 +70,16 @@ export function Upload(){
             </ToastContainer>
             <Container>
                 <Form onSubmit={(event) => handleSubmit(event)}>
-                    <Form.Label >Send your sales file here:</Form.Label>
-                    <input
-                        name="file"
-                        type="file"
-                        onChange={(e) => handleFileChange(e)}
-                    >
-                    </input>
-                    <Button variant="Primary" type="submit">Submit</Button>
+                    <Form.Group className="my-3">
+                        <Form.Label >Send your sales file here:</Form.Label>
+                        <Form.Control
+                            name="file"
+                            type="file"
+                            onChange={(e) => handleFileChange(e)}
+                        >
+                        </Form.Control>
+                    </Form.Group>
+                    <Button variant="dark" type="submit">Submit</Button>
                 </Form>
             </Container>
         </>
