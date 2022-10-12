@@ -5,6 +5,8 @@ WORKDIR /app
 COPY . ./
 # Install required tools
 RUN dotnet tool install --global dotnet-ef
+# Run tests
+RUN dotnet test
 # Restore as distinct layers
 RUN dotnet restore
 # Build and publish a release

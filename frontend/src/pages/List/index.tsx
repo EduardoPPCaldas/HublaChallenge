@@ -5,7 +5,7 @@ import { NavbarComponent } from "../../components/NavbarComponent";
 import { SaleModel } from "../../models/sale-model";
 
 export function List() {
-    const [sales, getSales] = useState([{} as SaleModel])
+    const [sales, getSales] = useState([] as SaleModel[])
 
     useEffect(() => {
         getSalesList();
